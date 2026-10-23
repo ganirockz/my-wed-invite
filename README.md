@@ -14,7 +14,7 @@ Open [http://localhost:8000](http://localhost:8000). A local server is needed so
 
 ## Customize wedding details
 
-Edit [`wedding-details.js`](wedding-details.js) to update the couple and parents, event schedule, ceremony time, venue address, and map search. The site currently reflects the Telugu invitation date, **15 November 2026**, and Ganesh's confirmed **9:14 PM IST** muhurtham. The PDF's English date and time differ from its Telugu date line and the later time confirmation; confirm the date before sharing the final invitation if the English month was intended.
+Edit [`wedding-details.js`](wedding-details.js) to update the couple and parents, event schedule, ceremony time, venue address, and map search. The site currently reflects the Telugu invitation date, **15 November 2026**, and Ganesh's confirmed **9:15 PM IST** muhurtham. The PDF's English date and time differ from its Telugu date line and the later time confirmation; confirm the date before sharing the final invitation if the English month was intended.
 
 The map and both directions buttons use the supplied Google Maps location link. Update `mapUrl` in `wedding-details.js` if the destination changes; `mapQuery` remains the fallback search location.
 
