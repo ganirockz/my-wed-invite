@@ -17,7 +17,7 @@ window.WEDDING_DETAILS = {
     profession: 'Software Engineer'
   },
   familyBlessings: 'Sri Rapeti (Late) Sai Naidu & Smt. Subbayyamma',
-  hosts: 'Rapeti Venkata Satyam Apparao (Srinu) & Smt. Lakshmi',
+  hosts: 'Rapeti Venkata Satyam Apparao (Srinu) & Lakshmi',
   date: '2026-11-15',
   dateLabel: '15 November 2026',
   day: 'Sunday',
@@ -28,7 +28,7 @@ window.WEDDING_DETAILS = {
   venueAddress: 'PXF9+2P9, Venkupalem, Seethanagaram, Andhra Pradesh 531032',
   mapQuery: 'PXF9+2P9, Venkupalem, Seethanagaram, Andhra Pradesh 531032',
   events: [
-    { name: 'Dinner', date: '15 November 2026', time: '7:00 PM onwards', description: 'Dinner at the marriage venue.' },
+    { name: 'Dinner', date: '15 November 2026', time: '7:00 PM onwards', description: 'Dinner will be served at the venue.' },
     { name: 'Muhurtham', date: '15 November 2026', time: '9:14 PM', description: 'The wedding ceremony.' }
   ]
 };
