@@ -29,12 +29,9 @@ No build step is needed. Use a custom domain through the same Pages settings if 
 
 ## Assets
 
-- `assets/ganesha-invitation-template.jpg` — the supplied ivory and gold Ganesha poster, retained as an unused alternate.
-- `assets/wedding-background.mp3` — the supplied background music track.
-- `assets/wedding-opening.mp4` — the muted video that plays once before the welcome slide.
-- `assets/wedding-welcome.jpeg` — the illustrated couple in the wedding mandap, shown on the welcome slide.
-- `assets/ganesha-blessing.svg` — the earlier vector illustration, retained as an unused alternate.
-- `assets/namaskaram-greeting.gif` — existing optional greeting animation; not used in this invitation flow.
-- `assets/namaskaram-couple.blend` and `assets/namaskaram-couple.png` — existing Blender source and render; neither is required by the page.
+- `assets/wedding-opening.mp4` and `assets/lord-ganesha-mobile.mp4` — desktop and mobile opening videos.
+- `assets/wedding-background.mp3` — the background music track.
+- `assets/wedding-welcome.jpeg` — the couple artwork on the welcome slide.
+- `assets/ganesha-logo.jpeg`, `assets/lord-venkateswara-logo.jpeg`, and `assets/lord-shiva-parvathi-devi-logo.jpeg` — the family blessing logos.
 
 The page currently has no RSVP section, as requested.

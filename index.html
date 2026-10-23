@@ -77,25 +77,29 @@
     .video-continue{min-height:46px;margin:0;padding:12px 17px;border-radius:999px;background:#fffaf0ed;color:#6c293d;box-shadow:0 5px 22px #1b0b1280;font-size:.62rem;letter-spacing:.1em}
     .video-continue:hover{background:#fff;color:#4e1b2b}
     @media(max-width:680px){.video-opening{padding:18px}.video-continue{min-height:42px;padding:11px 15px}}
-    .music-control{position:fixed;right:20px;bottom:20px;z-index:9;display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:10px 15px;border:1px solid #c4a46d;border-radius:999px;background:#fffaf0ed;color:#6c293d;box-shadow:0 5px 20px #40241a24;font:600 .65rem var(--serif);letter-spacing:.08em;text-transform:uppercase;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(5px);transition:opacity .25s,transform .25s,background .2s}
-    body.invitation-open .music-control{opacity:1;pointer-events:auto;transform:translateY(0)}
+    .music-control{position:fixed;left:20px;bottom:20px;z-index:11;display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:10px 15px;border:1px solid #c4a46d;border-radius:999px;background:#fffaf0ed;color:#6c293d;box-shadow:0 5px 20px #40241a24;font:600 .65rem var(--serif);letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .2s}
     .music-control:hover{background:#fff}
     .music-control>span:first-child{font-size:1rem}
     .music-control:focus-visible{outline:2px solid #9a7546;outline-offset:4px}
-    @media(max-width:680px){.music-control{right:14px;bottom:14px;min-height:42px;padding:9px 13px}}
+    @media(max-width:680px){.music-control{left:14px;bottom:14px;min-height:42px;padding:9px 13px}}
+    @media(max-width:680px){
+      .welcome:before,.welcome:after{display:none}
+      .welcome-greeting,.welcome-translation,.welcome-intro,.welcome-names,.welcome-date{width:100%;text-align:center;justify-self:center}
+      .welcome-figure,.welcome-actions{justify-self:center;width:100%}
+    }
   </style>
 </head>
 <body>
   <section class="opening-cover video-opening" id="opening-cover" aria-label="Wedding invitation opening">
-    <video class="opening-video" autoplay muted playsinline preload="auto" aria-hidden="true">
-      <source src="assets/wedding-opening.mp4" type="video/mp4">
+    <video class="opening-video" autoplay muted playsinline preload="auto" aria-hidden="true"
+      data-desktop-src="assets/wedding-opening.mp4" data-mobile-src="assets/lord-ganesha-mobile.mp4">
     </video>
     <div class="opening-video-shade" aria-hidden="true"></div>
     <div class="opening-inner video-opening-inner">
       <button class="video-continue" id="open-invitation" type="button" aria-label="Enter the wedding invitation">Enter invitation <span aria-hidden="true">↗</span></button>
     </div>
   </section>
-  <audio id="wedding-music" loop preload="none">
+  <audio id="wedding-music" autoplay loop preload="auto">
     <source src="assets/wedding-background.mp3" type="audio/mpeg">
   </audio>
   <button class="music-control" id="music-toggle" type="button" aria-label="Play wedding music" aria-pressed="false">
@@ -139,13 +143,15 @@
         <p class="family-note" id="family-blessing">With blessings of Sri Rapeti (Late) Sai Naidu &amp; Smt. Subbayyamma<br>Hosted by Sri Rapeti Venkata Satyam Apparao (Srinu) &amp; Smt. Lakshmi</p>
         <p class="section-label">The groom</p>
         <h3 class="couple person-name" id="groom-name">Ganesh</h3>
-        <p class="family-note" id="groom-family">Son of Rapeti Venkata Satyam Apparao (Srinu) &amp; Lakshmi<br>B.Tech., N.I.T. · Software Engineer</p>
+        <p class="family-note" id="groom-qualification">B.Tech., N.I.T. · Software Engineer</p>
+        <p class="family-note" id="groom-family">Son of Rapeti Venkata Satyam Apparao (Srinu) &amp; Lakshmi</p>
         <div class="gold-rule"></div>
         <p class="section-label">Together with</p>
         <p class="couple"><span class="amp">and</span></p>
         <p class="section-label">The bride</p>
         <h3 class="couple person-name" id="bride-name">Jaya Sai Pragnya</h3>
-        <p class="family-note" id="bride-family">Daughter of Bheesetty Ome Siva Rama Krishanayya &amp; Lakshmi Lavanya<br>M.Tech., BITS Pilani · Software Engineer</p>
+        <p class="family-note" id="bride-qualification">M.Tech., BITS Pilani · Software Engineer</p>
+        <p class="family-note" id="bride-family">Daughter of Bheesetty Ome Siva Rama Krishanayya &amp; Lakshmi Lavanya</p>
         <p class="invite-copy">With joy in our hearts, our families invite you to bless the couple and celebrate their wedding.</p>
         <div class="gold-rule"></div>
         <p class="section-label">The auspicious occasion</p>
@@ -206,6 +212,21 @@
       document.getElementById('welcome-date').textContent=`${wedding.dateLabel} · ${wedding.shortLocation}`;
       const cover=document.getElementById('opening-cover');
       const openingVideo=cover.querySelector('.opening-video');
+      const mobileVideoQuery=window.matchMedia('(max-width: 680px)');
+      const setOpeningVideoSource=()=>{
+        const source=mobileVideoQuery.matches?openingVideo.dataset.mobileSrc:openingVideo.dataset.desktopSrc;
+        if(openingVideo.dataset.activeSrc===source)return;
+        openingVideo.dataset.activeSrc=source;
+        openingVideo.src=source;
+        openingVideo.load();
+      };
+      setOpeningVideoSource();
+      mobileVideoQuery.addEventListener('change',()=>{
+        if(cover.classList.contains('is-opening'))return;
+        const wasPlaying=!openingVideo.paused;
+        setOpeningVideoSource();
+        if(wasPlaying)openingVideo.play().catch(()=>openInvitation());
+      });
       const weddingMusic=document.getElementById('wedding-music');
       const musicToggle=document.getElementById('music-toggle');
       const musicLabel=musicToggle.querySelector('.music-control-label');
@@ -217,23 +238,31 @@
       };
       weddingMusic.addEventListener('play',syncMusicControl);
       weddingMusic.addEventListener('pause',syncMusicControl);
+      syncMusicControl();
       musicToggle.addEventListener('click',()=>{
         if(weddingMusic.paused)weddingMusic.play().catch(()=>{});
         else weddingMusic.pause();
       });
       const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if(reducedMotion)openingVideo.pause();
-      else openingVideo.play().catch(()=>openInvitation());
+      else {
+        weddingMusic.play().catch(()=>{});
+        openingVideo.play().catch(()=>openInvitation());
+      }
       function openInvitation(){
         if(cover.classList.contains('is-opening'))return;
         weddingMusic.play().catch(()=>{});
         openingVideo.pause();
         cover.classList.add('is-opening');
-        window.setTimeout(()=>{cover.classList.add('is-dismissed');cover.setAttribute('aria-hidden','true');document.body.classList.add('invitation-open');document.getElementById('welcome').focus({preventScroll:true});},250);
+        window.setTimeout(()=>{cover.classList.add('is-dismissed');cover.setAttribute('aria-hidden','true');document.getElementById('welcome').focus({preventScroll:true});},250);
         window.setTimeout(()=>cover.remove(),1050);
       }
       document.getElementById('open-invitation').addEventListener('click',openInvitation);
       openingVideo.addEventListener('ended',openInvitation,{once:true});
+      openingVideo.addEventListener('timeupdate',()=>{
+        if(Number.isFinite(openingVideo.duration)&&openingVideo.duration>0&&openingVideo.currentTime>=openingVideo.duration-.35)openInvitation();
+      });
+      openingVideo.addEventListener('error',openInvitation,{once:true});
       if(reducedMotion)openInvitation();
       document.getElementById('wedding-date-label').textContent=wedding.dateLabel;
       document.getElementById('muhurtham-label').textContent=`Sumuhurtham at ${wedding.muhurthamLabel} · India time`;
@@ -242,8 +271,10 @@
       document.getElementById('welcome-bride').textContent=wedding.bride.name;
       document.getElementById('groom-name').textContent=wedding.groom.name;
       document.getElementById('bride-name').textContent=wedding.bride.name;
-      document.getElementById('groom-family').textContent=`Son of ${wedding.groom.parents}\n${wedding.groom.qualification} · ${wedding.groom.profession}`;
-      document.getElementById('bride-family').textContent=`Daughter of ${wedding.bride.parents}\n${wedding.bride.qualification} · ${wedding.bride.profession}`;
+      document.getElementById('groom-qualification').textContent=`${wedding.groom.qualification} · ${wedding.groom.profession}`;
+      document.getElementById('groom-family').textContent=`Son of ${wedding.groom.parents}`;
+      document.getElementById('bride-qualification').textContent=`${wedding.bride.qualification} · ${wedding.bride.profession}`;
+      document.getElementById('bride-family').textContent=`Daughter of ${wedding.bride.parents}`;
       document.getElementById('family-blessing').textContent=`With blessings of ${wedding.familyBlessings}\nHosted by ${wedding.hosts}`;
       document.getElementById('venue-name').textContent=wedding.venueName;
       document.getElementById('venue-address').textContent=wedding.venueAddress;
