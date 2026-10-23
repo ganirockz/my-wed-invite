@@ -25,9 +25,8 @@ window.WEDDING_DETAILS = {
   muhurtham: '2026-11-15T21:14:00+05:30',
   muhurthamLabel: '9:14 PM IST',
   venueName: 'At our residence, near Ramalayam',
-  venueAddress: 'Venkupalem Village, Anakapalle Mandal, Andhra Pradesh',
-  mapQuery: 'Venkupalem Village, Anakapalle Mandal, Andhra Pradesh',
-  mapUrl: 'https://maps.app.goo.gl/3dGbDKQETDSyBCbD6',
+  venueAddress: 'PXF9+2P9, Venkupalem, Seethanagaram, Andhra Pradesh 531032',
+  mapQuery: 'PXF9+2P9, Venkupalem, Seethanagaram, Andhra Pradesh 531032',
   events: [
     { name: 'Dinner', date: '15 November 2026', time: '7:00 PM onwards', description: 'Dinner at the marriage venue.' },
     { name: 'Muhurtham', date: '15 November 2026', time: '9:14 PM', description: 'The wedding ceremony.' }

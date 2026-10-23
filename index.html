@@ -280,10 +280,11 @@
       document.getElementById('venue-address').textContent=wedding.venueAddress;
       document.getElementById('closing-couple').textContent=wedding.coupleNames;
       const venueQuery=encodeURIComponent(wedding.mapQuery);
-      const mapUrl=wedding.mapUrl||`https://www.google.com/maps/search/?api=1&query=${venueQuery}`;
+      const mapUrl=`https://www.google.com/maps/search/?api=1&query=${venueQuery}`;
+      const directionsUrl=`https://www.google.com/maps/dir/?api=1&destination=${venueQuery}`;
       document.getElementById('open-map-link').href=mapUrl;
-      document.getElementById('directions-link').href=mapUrl;
-      document.getElementById('venue-map').src=`https://www.google.com/maps?q=${encodeURIComponent(mapUrl)}&output=embed`;
+      document.getElementById('directions-link').href=directionsUrl;
+      document.getElementById('venue-map').src=`https://www.google.com/maps?q=${venueQuery}&output=embed`;
       const timeline=document.getElementById('event-timeline');
       wedding.events.forEach((event,index)=>{
         const card=document.createElement('article');card.className='event-card reveal';
